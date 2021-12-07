@@ -1,5 +1,5 @@
 const mix = require('laravel-mix');
-
+const path = require('path');
 /*
  |--------------------------------------------------------------------------
  | Mix Asset Management
@@ -11,7 +11,12 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/backend/app.js', 'dist/').vue()
+mix.js('resources/backend/main.js', 'dist/').vue()
     // .postCss('resources/scss/app.scss', 'public/css', [
     //     //
     // ]);
+
+
+mix.alias({
+    '@': path.join(__dirname, 'resources/backend')
+});
