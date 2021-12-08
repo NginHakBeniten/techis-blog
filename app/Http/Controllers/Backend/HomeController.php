@@ -10,6 +10,7 @@ class HomeController extends Controller
 {
     public function index(Request $request, $tag = null, $article = null)
     {
+        // dd($request);
         return view('backend.app');
     }
 }
