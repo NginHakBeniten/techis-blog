@@ -1,7 +1,6 @@
-import { h, resolveComponent } from 'vue'
-import { createRouter, createWebHistory } from 'vue-router'
-
-import DefaultLayout from '@/layouts/DefaultLayout'
+import DefaultLayout from '@/layouts/DefaultLayout';
+import { h, resolveComponent } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   {
