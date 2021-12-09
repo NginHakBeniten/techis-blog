@@ -1,32 +1,55 @@
 <template>
-  <CForm>
-    <div class="mb-3">
-      <CFormLabel for="exampleFormControlInput1">Email address</CFormLabel>
-      <CFormInput
-        type="email"
-        id="exampleFormControlInput1"
-        placeholder="name@example.com"
-      />
-    </div>
-    <div class="mb-3">
-      <CFormLabel for="exampleFormControlTextarea1"
-        >Example textarea</CFormLabel
-      >
-      <CFormTextarea id="exampleFormControlTextarea1" rows="3"></CFormTextarea>
-    </div>
-  </CForm>
+    <CForm>
+        <div class="mb-3">
+            <CFormLabel for="username">Username</CFormLabel>
+            <CFormInput type="text" id="username" placeholder="example" />
+        </div>
+        <div class="mb-3">
+            <CFormLabel for="email">Email address</CFormLabel>
+            <CFormInput
+                type="email"
+                id="email"
+                placeholder="name@example.com"
+            />
+        </div>
+        <div class="mb-3">
+            <CFormLabel for="role">User Role</CFormLabel>
+            <CFormSelect
+                id="role"
+                aria-label="Default select example"
+                :options="[
+                    'Role',
+                    { label: 'Admin', value: 'Admin' },
+                    { label: 'Editor', value: 'Editor' },
+                ]"
+            >
+            </CFormSelect>
+        </div>
+        <div class="mb-3">
+            <CButton class="custom-action-btn" color="primary">Update</CButton>
+        </div>
+    </CForm>
 </template>
 
 <script>
-import { onMounted, onUpdated, onUnmounted } from 'vue'
+import { onBeforeRouteUpdate, useRoute } from "vue-router";
 export default {
-  setup() {
-    // onMounted(() => {
-    //   console.log("mounted!");
-    // });
-  },
+    setup(props) {
+        const route = useRoute();
+        console.log("route", route.params);
+        // onBeforeRouteUpdate((to, from) => {
+        // console.log("to", to);
+        // only fetch the user if the id changed as maybe only the query or the hash changed
+        // if (to.params.id !== from.params.id) {
+        //     userData.value = await fetchUser(to.params.id);
+        // }
+        // });
+
+        // onMounted(() => {
+        //   console.log("mounted!");
+        // });
+    },
 };
 </script>
 
-<style>
-</style>
+<style></style>
