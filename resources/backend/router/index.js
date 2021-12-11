@@ -25,17 +25,17 @@ const routes = [
                 children: [
                     {
                         path: "",
-                        component: () => import("@/views/user/Index.vue"),
+                        component: () => import("@/views/user/components/Index.vue"),
                     },
                     {
                         path: "create",
-                        name: "Create User",
-                        component: () => import("@/views/user/User.vue"),
+                        name: "create",
+                        component: () => import("@/views/user/components/User.vue"),
                     },
                     {
                         path: "update/:id",
                         name: "update",
-                        component: () => import("@/views/user/User.vue"),
+                        component: () => import("@/views/user/components/User.vue"),
                     },
                 ],
             },
