@@ -42,7 +42,27 @@ const routes = [
             {
                 path: "article",
                 name: "Article Management",
-                component: () => import("@/views/Dashboard.vue"),
+                component: {
+                    render() {
+                        return h(resolveComponent("router-view"));
+                    },
+                },
+                children: [
+                    {
+                        path: "",
+                        component: () => import("@/views/article/Index.vue"),
+                    },
+                    {
+                        path: "create",
+                        name: "Create User",
+                        component: () => import("@/views/article/Article.vue"),
+                    },
+                    {
+                        path: "update/:id",
+                        name: "update",
+                        component: () => import("@/views/article/Article.vue"),
+                    },
+                ],
             },
             {
                 path: "tag",

@@ -12,6 +12,7 @@ const path = require('path');
  */
 
 mix.js('resources/backend/main.js', 'dist/').vue()
+    .sass('resources/backend/styles/style.scss', 'public/css/backend')
     // .postCss('resources/scss/app.scss', 'public/css', [
     //     //
     // ]);
