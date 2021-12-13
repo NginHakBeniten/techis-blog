@@ -10,17 +10,18 @@
             aria-label="Search..."
             aria-describedby="button-addon2"
         />
-        <CButton @click="addNewHandler" v-show="isAddNew" color="primary"
-            >Add New</CButton
+        <CButton @click="addNewHandler" v-show="isAddNew" color="primary">
+            Add New
+        </CButton
         >
     </div>
     <CTable>
         <CTableHead color="dark">
             <CTableRow>
                 <CTableHeaderCell scope="col">#</CTableHeaderCell>
-                <template :key="header" v-for="header in headers">
+                <template :key="header.title" v-for="header in headers">
                     <CTableHeaderCell scope="col">{{
-                        header
+                        header.title
                     }}</CTableHeaderCell>
                 </template>
                 <CTableHeaderCell class="center" scope="col"
@@ -32,12 +33,12 @@
             <CTableRow
                 align="middle"
                 :key="index"
-                v-for="(user, index) in data"
+                v-for="(item, index) in data"
             >
                 <CTableHeaderCell scope="row">{{ index + 1 }}</CTableHeaderCell>
-                <template :key="value.id" v-for="(value, key) in user">
+                <template :key="header.id" v-for="(header, key) in headers">
                     <CTableDataCell v-if="key !== 'id'">{{
-                        value
+                        item[header.key]
                     }}</CTableDataCell>
                 </template>
 
@@ -45,16 +46,17 @@
                     <router-link
                         :to="{
                             name: `update`,
-                            params: { id: user.id },
+                            params: { id: item.id },
                         }"
                     >
-                        <CButton class="custom-action-btn" color="primary"
-                            >Update</CButton
-                        >
+                        <CButton class="custom-action-btn" color="primary" size="sm">
+                            <i class="bi bi-pencil"></i>
+                        </CButton>
                     </router-link>
-                    <CButton class="custom-action-btn" color="danger"
-                        >Delete</CButton
-                    >
+
+                    <CButton class="custom-action-btn text-white" color="danger" size="sm">
+                        <i class="bi bi-trash"></i>
+                    </CButton>
                 </CTableDataCell>
             </CTableRow>
         </CTableBody>
