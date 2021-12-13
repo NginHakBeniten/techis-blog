@@ -23,7 +23,7 @@
                         header
                     }}</CTableHeaderCell>
                 </template>
-                <CTableHeaderCell class="center" scope="col"
+                <CTableHeaderCell scope="col"
                     >Action</CTableHeaderCell
                 >
             </CTableRow>
@@ -41,7 +41,7 @@
                     }}</CTableDataCell>
                 </template>
 
-                <CTableDataCell class="center">
+                <CTableDataCell>
                     <router-link
                         :to="{
                             name: `update`,
@@ -74,7 +74,6 @@
 
 <script>
 import { useRouter } from "vue-router";
-import { mapActions, useStore } from 'vuex';
 export default {
     name: "BaseIndex",
     props: {

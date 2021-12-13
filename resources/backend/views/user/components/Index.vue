@@ -13,7 +13,7 @@ import BaseIndex from "../../../components/base/BaseIndex.vue";
 import { useRouter } from "vue-router";
 export default {
     components: { BaseIndex },
-    setup(props, { emit }) {
+    setup() {
         const router = useRouter();
         const data = users.map((user) => {
             const slugColumns = columns.map((c) => c.slug);
@@ -26,8 +26,6 @@ export default {
         const headers = columns
             .filter((c) => c.title !== "ID")
             .map((c) => c.title);
-
-
         return { headers, totalPage: 5, data };
     },
 };
