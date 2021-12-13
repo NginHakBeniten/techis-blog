@@ -34,7 +34,6 @@
     <div class="text-right">
         <CButton
             @click="addNewHandler"
-            class="custom-action-btn"
             color="primary"
             >{{ userId ? "Update" : "Add New" }}</CButton
         >
@@ -43,10 +42,12 @@
 
 <script>
 import { useRoute } from "vue-router";
+import { useStore } from 'vuex';
 import { users } from "../user.js";
 export default {
     setup(props, {}) {
         const route = useRoute();
+        const store = useStore();
         const userId = +route.params.id;
         let user;
         if (!userId) {
@@ -58,6 +59,7 @@ export default {
         } else {
             user = users.find((u) => u.id === userId);
         }
+        store.dispatch("getCurrentUser", { user });
 
         return { user, userId };
     },
