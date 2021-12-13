@@ -36,10 +36,8 @@ class Authenticate
     public function handle($request, Closure $next, $guard = null)
     {
         if ($this->auth->guard($guard)->guest()) {
-            return response('Unauthorized.', 401);
+            return response()->json(['data' => ['message' => 'Unauthorized', 'code' => 401]]);
         }
-
-        $request->attributes->set('currentRouteName', array_search($request->getPathInfo(), app()->router->namedRoutes));
 
         return $next($request);
     }

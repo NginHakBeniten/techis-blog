@@ -1,0 +1,16 @@
+<?php
+
+namespace App\Http\Controller\Api\Backend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
+class HomeController extends Controller
+{
+    public function index(Request $request, $tag = null, $article = null)
+    {
+        // dd($request);
+        return view('backend.app');
+    }
+}

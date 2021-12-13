@@ -59,7 +59,12 @@ $app->singleton(
 |
 */
 
-$app->configure('app');
+// $app->configure('app');
+
+collect(scandir(__DIR__ . '/../config'))->each(function ($item) use ($app) {
+    $app->configure(basename($item, '.php'));
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -76,9 +81,9 @@ $app->configure('app');
 //     App\Http\Middleware\ExampleMiddleware::class
 // ]);
 
-// $app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-// ]);
+$app->routeMiddleware([
+    'auth' => App\Http\Middleware\Authenticate::class
+]);
 
 /*
 |--------------------------------------------------------------------------
@@ -92,10 +97,11 @@ $app->configure('app');
 */
 
 // $app->register(App\Providers\AppServiceProvider::class);
-// $app->register(App\Providers\AuthServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
 
 $app->register(\Thedevsaddam\LumenRouteList\LumenRouteListServiceProvider::class);
+$app->register(Tymon\JWTAuth\Providers\LumenServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +126,15 @@ $app->router->group([
     //         require($file);
     //     }
     // });
+    $router->group([
+        'namespace' => 'Api\Backend',
+        'prefix' => 'api/admin'
+    ], function ($router) {
+        $files = glob(__DIR__ . '/../routes/api/backend/*.php');
+        foreach ($files as $file) {
+            require($file);
+        }
+    });
     require __DIR__.'/../routes/web.php';
 });
 
