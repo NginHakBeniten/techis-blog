@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Laravel\Lumen\Routing\Controller as BaseController;
 use App\Helpers\ResponseHelper;
 use Illuminate\Http\Response;
-use Laravel\Lumen\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    private $page_limit = 15;
+    private $pageLimit = 15;
 
     /**
      * getPagination
@@ -17,78 +17,82 @@ class Controller extends BaseController
      */
     protected function getPagination()
     {
-        return $this->page_limit;
+        return $this->pageLimit;
     }
 
     /**
      * setPagination
      *
-     * @param  mixed $page_limit
+     * @param  mixed $pageLimit
      * @return void
      */
-    protected function setPagination($page_limit)
+    protected function setPagination($pageLimit)
     {
-        $this->page_limit = $page_limit;
+        $this->pageLimit = $pageLimit;
     }
-    
+
     /**
      * successMessage
      *
      * @param  mixed $message
-     * @param  mixed $status_code = Response::HTTP_OK
+     * @param  mixed $statusCode = Response::HTTP_OK
      * @return void
      */
-    protected function successMessage($message, $status_code = Response::HTTP_OK)
+    protected function successMessage($message, $statusCode = Response::HTTP_OK)
     {
-        return ResponseHelper::successMessage($message, $status_code);
+        return ResponseHelper::successMessage($message, $statusCode);
     }
 
     /**
      * successResponse
      *
      * @param  mixed $data
-     * @param  mixed $status_code = Response::HTTP_OK
+     * @param  mixed $statusCode = Response::HTTP_OK
      * @return void
      */
-    protected function successResponse($data, $status_code = Response::HTTP_OK)
+    protected function successResponse($data, $statusCode = Response::HTTP_OK)
     {
-        return ResponseHelper::successResponse($data, $status_code);
+        return ResponseHelper::successResponse($data, $statusCode);
     }
 
     /**
-     * successPaginateResponse
+     * success_paginate_response
      *
      * @param  mixed $data
-     * @param  mixed $status_code = Response::HTTP_OK
+     * @param  mixed $statusCode = Response::HTTP_OK
      * @return void
      */
-    protected function successPaginateResponse($data, $meta = null)
+    protected function successPaginateResponse($data)
     {
-        return ResponseHelper::successPaginateResponse(is_array($data) ? $data : $data->toArray(), $meta);
+        return ResponseHelper::successPaginateResponse($data->getCollection(), [
+            'total' => $data->total(),
+            'per_page' => $data->perPage(),
+            'current_page' => $data->currentPage(),
+            'total_pages' => $data->lastPage()
+        ]);
     }
 
     /**
      * errorResponse
      *
      * @param  mixed $data
-     * @param  mixed $status_code = Response::HTTP_UNPROCESSABLE_ENTITY
+     * @param  mixed $statusCode = Response::HTTP_UNPROCESSABLE_ENTITY
      * @return void
      */
-    protected function errorResponse($data, $status_code = Response::HTTP_UNPROCESSABLE_ENTITY)
+    protected function errorResponse($data, $statusCode = Response::HTTP_UNPROCESSABLE_ENTITY)
     {
-        return ResponseHelper::errorResponse($data, $status_code);
+        return ResponseHelper::errorResponse($data, $statusCode);
     }
 
     /**
      * errorMessage
      *
      * @param  mixed $message
-     * @param  mixed $status_code = Response::HTTP_UNPROCESSABLE_ENTITY
+     * @param  mixed $statusCode = Response::HTTP_UNPROCESSABLE_ENTITY
      * @return void
      */
-    protected function errorMessage($message, $status_code = Response::HTTP_UNPROCESSABLE_ENTITY)
+    protected function errorMessage($message, $statusCode = Response::HTTP_UNPROCESSABLE_ENTITY)
     {
-        return ResponseHelper::errorMessage($message, $status_code);
+        return ResponseHelper::errorMessage($message, $statusCode);
     }
-
 }
