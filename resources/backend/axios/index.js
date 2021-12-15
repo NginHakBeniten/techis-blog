@@ -1,11 +1,12 @@
 // axios
 import axios from 'axios';
-// import store from '@store';
 import BaseResponse from '../responses/base_response';
 import Vue from 'vue';
 import Constants from '../constants';
+import { VUE_APP_ADMIN_API_URL_DEV } from '../services/config';
+import Cookies from 'js-cookie';
 
-const baseURL = process.env.VUE_APP_API_BASE_URL;
+const baseURL = VUE_APP_ADMIN_API_URL_DEV;
 
 const http = axios.create({
     baseURL,
@@ -18,7 +19,7 @@ const http = axios.create({
 // request interceptor
 http.interceptors.request.use(
     configuration => {
-        configuration.headers.common["Authorization"] = `Bearer ${ Vue.$cookies.get(Constants.ACCESS_TOKEN) }`;
+        configuration.headers.common["Authorization"] = `Bearer ${ Cookies.get(Constants.ACCESS_TOKEN) }`;
         return configuration;
     },
     e => {

@@ -1,17 +1,21 @@
 import actions from "./actions";
 import mutations from "./mutations";
 import getters from "./getters";
-import modules from './modules';
+import modules from "./modules";
+import { createStore } from "vuex";
 
-const state = {
-    sidebarVisible: "",
-    sidebarUnfoldable: false,
-};
-
-export default {
-    state,
+// Create a new store instance.
+const store = createStore({
+    state() {
+        return {
+            sidebarVisible: "",
+            sidebarUnfoldable: false,
+        };
+    },
+    mutations,
     actions,
     getters,
-    mutations,
-    modules
-};
+    modules,
+});
+
+export default store;

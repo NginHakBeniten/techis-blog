@@ -2,11 +2,12 @@ import { h, resolveComponent } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import DefaultLayout from "@/layouts/DefaultLayout";
+import guard from './guards'
 
 const routes = [
     {
         path: "/admin/login",
-        name: "Login",
+        name: "login",
         component: () => import("@/views/pages/Login.vue"),
     },
     {
@@ -16,7 +17,7 @@ const routes = [
         children: [
             {
                 path: "dashboard",
-                name: "Dashboard",
+                name: "dashboard",
                 component: () => import("@/views/Dashboard.vue"),
             },
             {
@@ -111,5 +112,7 @@ const router = createRouter({
         return { top: 0 };
     },
 });
+
+router.beforeEach((guard.beforeEach));
 
 export default router;

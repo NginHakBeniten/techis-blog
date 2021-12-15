@@ -39,6 +39,7 @@
     "@vueform/multiselect": "^2.2.1",
     "bootstrap-icons": "^1.7.2",
     "eslint": "^7.32.0",
+    "js-cookie": "^3.0.1",
     "node-sass": "^6.0.1",
     "prettier": "^2.4.1",
     "sass": "^1.32.7",
