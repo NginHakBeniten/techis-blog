@@ -18,16 +18,12 @@ export default {
 
         const store = useStore();
 
-        console.log(store);
-
         const headers = columns.filter((c) => c.title !== "ID")
 
         const data = ref([])
         const getTags = async () => {
             data.value = await store.dispatch('tag/getTags')
         }
-
-        console.log(da);
 
         onMounted(() => {
             getTags();
