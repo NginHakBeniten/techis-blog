@@ -72,7 +72,27 @@ const routes = [
             {
                 path: "tag",
                 name: "Tag Management",
-                component: () => import("@/views/Dashboard.vue"),
+                component: {
+                    render() {
+                        return h(resolveComponent("router-view"));
+                    },
+                },
+                children: [
+                    {
+                        path: "",
+                        component: () => import("@/views/tag/components/Index.vue"),
+                    },
+                    {
+                        path: "create",
+                        name: "Create Tag",
+                        component: () => import("@/views/tag/components/Tag.vue"),
+                    },
+                    {
+                        path: "update/:id",
+                        name: "Update Tag",
+                        component: () => import("@/views/tag/components/Tag.vue"),
+                    },
+                ],
             },
             {
                 path: "log",
