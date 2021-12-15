@@ -3,10 +3,9 @@ import axios from 'axios';
 import BaseResponse from '../responses/base_response';
 import Vue from 'vue';
 import Constants from '../constants';
-import { VUE_APP_ADMIN_API_URL_DEV } from '../services/config';
 import Cookies from 'js-cookie';
 
-const baseURL = VUE_APP_ADMIN_API_URL_DEV;
+const baseURL = process.env.MIX_ADMIN_API_URL_DEV ?? 'http://localhost:8000/api/admin/';
 
 const http = axios.create({
     baseURL,
