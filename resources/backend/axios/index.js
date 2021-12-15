@@ -36,7 +36,7 @@ http.interceptors.response.use(
             // do something
             return Promise.reject(response.getData());
         } else if (response.statusUnauthorize()) {
-            // do something
+            Cookies.remove(Constants.ACCESS_TOKEN);
             return Promise.reject(response.getData());
         } else if (response.statusForbidden()) {
             // do something
