@@ -1,4 +1,3 @@
-// axios
 import axios from 'axios';
 import BaseResponse from '../responses/base_response';
 import Vue from 'vue';

@@ -7,6 +7,7 @@ use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
+use Illuminate\Validation\UnauthorizedException;
 use Illuminate\Validation\ValidationException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -24,6 +25,7 @@ class Handler extends ExceptionHandler
         HttpException::class,
         ModelNotFoundException::class,
         ValidationException::class,
+        UnauthorizedException::class
     ];
 
     /**
@@ -53,7 +55,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $exception)
     {
         if ($exception instanceof ValidationException) {
-            $error = $exception->validator->errors()->first();
+            $error = $exception->validator->errors();
             \Log::debug($error);
             return ResponseHelper::errorMessage($error);
         }
