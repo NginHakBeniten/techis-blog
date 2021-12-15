@@ -1,12 +1,9 @@
-// axios
 import axios from 'axios';
-import BaseResponse from '../responses/base_response';
-import Vue from 'vue';
-import Constants from '../constants';
-import { VUE_APP_ADMIN_API_URL_DEV } from '../services/config';
+import BaseResponse from '@responses/base_response';
+import Constants from '@constants';
 import Cookies from 'js-cookie';
 
-const baseURL = VUE_APP_ADMIN_API_URL_DEV;
+const baseURL = 'http://localhost:8000/api/admin';
 
 const http = axios.create({
     baseURL,

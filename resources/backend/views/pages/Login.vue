@@ -21,7 +21,7 @@
                                             placeholder="Username"
                                             autocomplete="username"
                                             :model-value="initialValues.username"
-                                            @change="initialValues.username = $event.target.value"
+                                            @change="onChange"
                                         />
                                     </CInputGroup>
                                     <CInputGroup class="mb-4">
@@ -34,7 +34,8 @@
                                             placeholder="Password"
                                             autocomplete="current-password"
                                             :model-value="initialValues.password"
-                                            @change="initialValues.password = $event.target.value"
+                                            @change="onChange"
+
                                         />
                                     </CInputGroup>
                                     <CRow>
@@ -82,31 +83,42 @@
 </template>
 
 <script>
-import { reactive, ref } from '@vue/reactivity';
+import { ref } from "@vue/reactivity";
 import { useStore } from "vuex";
-import { useRouter } from 'vue-router';
+import { useRouter } from "vue-router";
 export default {
     name: "Login",
-    setup(props) {
+    setup() {
         const store = useStore();
         const router = useRouter();
 
+        // For Dev
         const initialValues = ref({
-            username: "",
-            password: "",
+            username: "admin",
+            password: "123456",
         });
 
         const login = async () => {
             await store.dispatch("login", {
                 username: initialValues.value.username,
                 password: initialValues.value.password,
+            }).then(()=> {
+                router.push({ name: "dashboard" });
             });
-            router.push({name: 'dashboard'})
         };
+
+        const onChange = (event) => {
+            const {name, value} = event.target;
+            return {
+                ...initialValues.value
+                [name] = value
+            }
+        }
 
         return {
             login,
-            initialValues
+            onChange,
+            initialValues,
         };
     },
 };
