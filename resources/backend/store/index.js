@@ -1,6 +1,7 @@
 import actions from "./actions";
 import mutations from "./mutations";
 import getters from "./getters";
+import modules from './modules';
 
 const state = {
     sidebarVisible: "",
@@ -12,4 +13,5 @@ export default {
     actions,
     getters,
     mutations,
+    modules
 };

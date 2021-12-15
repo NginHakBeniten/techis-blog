@@ -1,9 +1,9 @@
 // axios
 import axios from 'axios';
-import store from '@store';
-import BaseResponse from '@responses/base_response';
+// import store from '@store';
+import BaseResponse from '../responses/base_response';
 import Vue from 'vue';
-import Constants from '@constants';
+import Constants from '../constants';
 
 const baseURL = process.env.VUE_APP_API_BASE_URL;
 
