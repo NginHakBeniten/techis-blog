@@ -1,7 +1,7 @@
 <template>
     <base-index
         :headers="headers"
-        :data="data"
+        :data="tags"
         :totalPage="totalPage"
     ></base-index>
 </template>
@@ -10,7 +10,7 @@
 import { columns } from "../column.js";
 import BaseIndex from "../../../components/base/BaseIndex.vue";
 import { useStore } from 'vuex';
-import { onMounted, ref } from 'vue';
+import { computed, onMounted } from 'vue';
 
 export default {
     components: { BaseIndex },
@@ -20,19 +20,14 @@ export default {
 
         const headers = columns.filter((c) => c.title !== "ID")
 
-        const data = ref([])
-        const getTags = async () => {
-            data.value = await store.dispatch('tag/getTags')
-        }
-
         onMounted(() => {
-            getTags();
+            store.dispatch('tag/getTags')
         });
+
         return { 
             headers, 
-            totalPage: 5, 
-            data: data.value.data,
-            getTags
+            totalPage: 5,
+            tags: computed(() => store.getters['tag/all'])
         };
     },
 };

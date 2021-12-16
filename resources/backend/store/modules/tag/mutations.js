@@ -1,5 +1,8 @@
 export default {
     SET_TAGS(state, res) {
-        state.tags = res.data
+        state.tags = {
+            ...state.tags,
+            ...res
+        }
     }
 }
