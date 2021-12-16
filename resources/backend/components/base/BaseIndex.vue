@@ -45,7 +45,7 @@
                 <CTableDataCell>
                     <router-link
                         :to="{
-                            name: `update`,
+                            path: `${path}/update/${item.id}`,
                             params: { id: item.id },
                         }"
                     >
@@ -75,6 +75,7 @@
 </template>
 
 <script>
+import { computed } from '@vue/reactivity';
 import { useRouter } from "vue-router";
 export default {
     name: "BaseIndex",
@@ -101,10 +102,14 @@ export default {
     setup(props) {
         const router = useRouter();
         const addNewHandler = () => {
-            router.push({ name: "create" });
+            router.push(path.value + "/create");
         };
+
+        const path = computed(() => router.currentRoute.value.path);
+        
         return {
             addNewHandler,
+            path,
             ...props,
         };
     },

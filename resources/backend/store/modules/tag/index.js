@@ -5,7 +5,10 @@ import getters from './getters';
 export default {
     namespaced: true,
     state: () => ({
-        tags: []
+        data: [],
+        meta: {
+            
+        }
     }),
     mutations,
     actions,

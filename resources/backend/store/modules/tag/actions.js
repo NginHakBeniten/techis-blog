@@ -7,4 +7,9 @@ export default {
             commit('SET_TAGS', res.data)
         })
     },
+    store({commit}, data) {
+        TagRequest.store(data).then(res => {
+            console.log(res);
+        })
+    }
 }

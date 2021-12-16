@@ -1,8 +1,8 @@
 export default {
     all(state) {
-        return state.tags.data
+        return state.data
     },
     meta(state) {
-        return state.tags.meta
+        return state.meta
     }
 }

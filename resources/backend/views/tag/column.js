@@ -4,8 +4,12 @@ const columns = [
         key: "id",
     },
     {
-        title: "Description",
+        title: "Name",
         key: "name",
+    },
+    {
+        title: "Slug",
+        key: "slug",
     }
 ];
 export { columns };

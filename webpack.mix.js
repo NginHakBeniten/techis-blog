@@ -23,4 +23,5 @@ mix.alias({
     '@constants': path.join(__dirname, 'resources/backend/constants'),
     '@responses': path.join(__dirname, 'resources/backend/responses'),
     '@requests': path.join(__dirname, 'resources/backend/requests'),
+    '@components': path.join(__dirname, 'resources/backend/components'),
 });
