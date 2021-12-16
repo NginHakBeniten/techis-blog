@@ -1,10 +1,12 @@
 <?php
 
+$controller = 'AuthController';
+
 $router->group([
     'prefix' => 'auth',
-], function () use ($router) {
+], function () use ($router, $controller) {
     $router
-        ->post('login', 'AuthController@login')
-        ->get('me', 'AuthController@me')
-        ->post('logout', 'AuthController@logout');
+        ->post('login', "$controller@login")
+        ->get('me', "$controller@me")
+        ->post('logout', "$controller@logout");
 });
