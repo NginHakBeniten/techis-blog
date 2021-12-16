@@ -28,9 +28,8 @@ http.interceptors.request.use(
 // response interceptor
 http.interceptors.response.use(
     httpResponse => {
-        const lateTime = performance.now() - httpResponse.config.startTime;
 
-        let response = new BaseResponse(httpResponse.data, null);
+        let response = new BaseResponse(httpResponse, null);
         if (response.statusUnprocessableEntity()) {
             // do something
             return Promise.reject(response.getData());
@@ -46,9 +45,7 @@ http.interceptors.response.use(
         }
 
         return Promise.resolve({
-            data: response.getData(),
-            startTime: httpResponse.config.startTime,
-            lateTime
+            data: response.getData()
         });
     },
     ({response}) => {

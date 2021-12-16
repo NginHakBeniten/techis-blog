@@ -5,7 +5,7 @@ const columns = [
     },
     {
         title: "Description",
-        key: "description",
+        key: "name",
     }
 ];
 export { columns };
