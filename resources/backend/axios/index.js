@@ -1,9 +1,10 @@
 import axios from 'axios';
-import BaseResponse from '@responses/base_response';
-import Constants from '@constants';
+import BaseResponse from '../responses/base_response';
+import Vue from 'vue';
+import Constants from '../constants';
 import Cookies from 'js-cookie';
 
-const baseURL = 'http://localhost:8000/api/admin';
+const baseURL = process.env.MIX_ADMIN_API_URL_DEV ?? 'http://localhost:8000/api/admin/';
 
 const http = axios.create({
     baseURL,
@@ -34,7 +35,7 @@ http.interceptors.response.use(
             // do something
             return Promise.reject(response.getData());
         } else if (response.statusUnauthorize()) {
-            // do something
+            Cookies.remove(Constants.ACCESS_TOKEN);
             return Promise.reject(response.getData());
         } else if (response.statusForbidden()) {
             // do something

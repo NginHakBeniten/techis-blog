@@ -7,23 +7,32 @@
 </template>
 
 <script>
-import { articles } from "../articles.js";
 import { columns } from "../column.js";
 import BaseIndex from "../../../components/base/BaseIndex.vue";
-import { useRouter } from "vue-router";
+import { useStore } from 'vuex';
+import { onMounted, ref } from 'vue';
+
 export default {
     components: { BaseIndex },
     setup(props, { emit }) {
-        const router = useRouter();
-        const data = articles;
 
-        const headers = columns
-            .filter((c) => c.title !== "ID")
+        const store = useStore();
 
+        const headers = columns.filter((c) => c.title !== "ID")
+
+        const data = ref([])
+        const getTags = async () => {
+            data.value = await store.dispatch('tag/getTags')
+        }
+
+        onMounted(() => {
+            getTags();
+        });
         return { 
             headers, 
             totalPage: 5, 
-            data 
+            data: data.value.data,
+            getTags
         };
     },
 };
