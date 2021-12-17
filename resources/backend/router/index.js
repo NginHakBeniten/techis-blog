@@ -2,27 +2,39 @@ import { h, resolveComponent } from "vue";
 import { createRouter, createWebHashHistory } from "vue-router";
 
 import DefaultLayout from "@/layouts/DefaultLayout";
-import guard from './guards'
+import guard from "./guards";
 
 const routes = [
     {
         path: "/admin/login",
         name: "login",
+        meta: {
+            breadcrumb: "Login",
+        },
         component: () => import("@/views/pages/Login.vue"),
     },
     {
         path: "/admin",
-        name: "Admin",
+        name: "admin",
+        meta: {
+            breadcrumb: "Admin",
+        },
         component: DefaultLayout,
         children: [
             {
                 path: "dashboard",
                 name: "dashboard",
+                meta: {
+                    breadcrumb: "Dashboard",
+                },
                 component: () => import("@/views/Dashboard.vue"),
             },
             {
                 path: "user",
-                name: "User Management",
+                name: "user",
+                meta: {
+                    breadcrumb: "User Management",
+                },
                 component: {
                     render() {
                         return h(resolveComponent("router-view"));
@@ -31,23 +43,35 @@ const routes = [
                 children: [
                     {
                         path: "",
-                        component: () => import("@/views/user/components/Index.vue"),
+                        component: () =>
+                            import("@/views/user/components/Index.vue"),
                     },
                     {
                         path: "create",
-                        name: "create",
-                        component: () => import("@/views/user/components/User.vue"),
+                        name: "create-user",
+                        meta: {
+                            breadcrumb: "Create User",
+                        },
+                        component: () =>
+                            import("@/views/user/components/User.vue"),
                     },
                     {
                         path: "update/:id",
-                        name: "update",
-                        component: () => import("@/views/user/components/User.vue"),
+                        name: "update-user",
+                        meta: {
+                            breadcrumb: "Update User",
+                        },
+                        component: () =>
+                            import("@/views/user/components/User.vue"),
                     },
                 ],
             },
             {
                 path: "article",
-                name: "Article Management",
+                name: "article",
+                meta: {
+                    breadcrumb: "Article Management",
+                },
                 component: {
                     render() {
                         return h(resolveComponent("router-view"));
@@ -56,23 +80,35 @@ const routes = [
                 children: [
                     {
                         path: "",
-                        component: () => import("@/views/article/components/Index.vue"),
+                        component: () =>
+                            import("@/views/article/components/Index.vue"),
                     },
                     {
                         path: "create",
-                        name: "Create User",
-                        component: () => import("@/views/article/components/Article.vue"),
+                        name: "create-article",
+                        meta: {
+                            breadcrumb: "Create Article",
+                        },
+                        component: () =>
+                            import("@/views/article/components/Article.vue"),
                     },
                     {
                         path: "update/:id",
-                        name: "update",
-                        component: () => import("@/views/article/components/Article.vue"),
+                        name: "update-article",
+                        meta: {
+                            breadcrumb: "Update Article",
+                        },
+                        component: () =>
+                            import("@/views/article/components/Article.vue"),
                     },
                 ],
             },
             {
                 path: "tag",
-                name: "Tag Management",
+                name: "tag",
+                meta: {
+                    breadcrumb: "Tag Management",
+                },
                 component: {
                     render() {
                         return h(resolveComponent("router-view"));
@@ -81,23 +117,35 @@ const routes = [
                 children: [
                     {
                         path: "",
-                        component: () => import("@/views/tag/components/Index.vue"),
+                        component: () =>
+                            import("@/views/tag/components/Index.vue"),
                     },
                     {
                         path: "create",
-                        name: "Create Tag",
-                        component: () => import("@/views/tag/components/Tag.vue"),
+                        name: "create-tag",
+                        meta: {
+                            breadcrumb: "Create Tag",
+                        },
+                        component: () =>
+                            import("@/views/tag/components/Tag.vue"),
                     },
                     {
                         path: "update/:id",
-                        name: "Update Tag",
-                        component: () => import("@/views/tag/components/Tag.vue"),
+                        name: "update-tag",
+                        meta: {
+                            breadcrumb: "Update Tag",
+                        },
+                        component: () =>
+                            import("@/views/tag/components/Tag.vue"),
                     },
                 ],
             },
             {
                 path: "log",
-                name: "Activity Log",
+                name: "activity-log",
+                meta: {
+                    breadcrumb: "Activity Log",
+                },
                 component: () => import("@/views/Dashboard.vue"),
             },
         ],
@@ -113,6 +161,6 @@ const router = createRouter({
     },
 });
 
-router.beforeEach((guard.beforeEach));
+router.beforeEach(guard.beforeEach);
 
 export default router;
