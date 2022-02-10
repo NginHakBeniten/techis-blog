@@ -1,42 +1,45 @@
 <template>
     <base-index
-        :headers="headers"
+        :columns="columns"
         :data="data"
-        :totalPage="totalPage"
+        :meta="meta"
+        :onClickPage="onClickPage"
+        :getDetail="getDetail"
     ></base-index>
 </template>
 
 <script>
-import { users } from "../user.js";
 import { columns } from "../column.js";
 import BaseIndex from "../../../components/base/BaseIndex.vue";
-import { useRouter } from "vue-router";
+import { computed, onMounted } from "@vue/runtime-core";
+import store from '@/store'
+
 export default {
     components: { BaseIndex },
     setup() {
-        const router = useRouter();
-        const data = users.map((user) => {
-            const slugColumns = columns.map((c) => c.slug);
-            return Object.keys(user)
-                .filter((key) => slugColumns.includes(key))
-                .reduce((cur, key) => {
-                    return { ...cur, [key]: user[key] };
-                }, {});
+        const onClickPage = (page) => {
+            store.dispatch("user/index", { page });
+        };
+
+        const getDetail = (data) => {
+            store.dispatch("user/detail", data);
+        };
+
+        onMounted(() => {
+            store.dispatch("user/index");
         });
-        const headers = columns
-            .filter((c) => c.title !== "ID")
-            .map((c) => c.title);
-        return { headers, totalPage: 5, data };
+
+        const data = computed(() => store.getters["user/all"]);
+        const meta = computed(() => store.getters["user/meta"]);
+
+        return {
+            columns,
+            data,
+            getDetail,
+            headers: columns,
+            meta,
+            onClickPage,
+        };
     },
 };
 </script>
-
-<style scope>
-.custom-action-btn {
-    margin: 0 10px;
-}
-
-.center {
-    text-align: center;
-}
-</style>

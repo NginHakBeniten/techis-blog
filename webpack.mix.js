@@ -21,6 +21,7 @@ mix.js('resources/backend/main.js', 'dist/').vue()
 mix.alias({
     '@': path.join(__dirname, 'resources/backend'),
     '@constants': path.join(__dirname, 'resources/backend/constants'),
+    '@store': path.join(__dirname, 'resources/backend/store'),
     '@responses': path.join(__dirname, 'resources/backend/responses'),
     '@requests': path.join(__dirname, 'resources/backend/requests'),
     '@components': path.join(__dirname, 'resources/backend/components'),

@@ -67,8 +67,10 @@ class Controller extends BaseController
         return ResponseHelper::successPaginateResponse($data->getCollection(), [
             'total' => $data->total(),
             'per_page' => $data->perPage(),
+            'total_page' => $data->lastPage(),
             'current_page' => $data->currentPage(),
-            'total_pages' => $data->lastPage()
+            'next_page' => $data->nextPageUrl(),
+            'prev_page' => $data->previousPageUrl()
         ]);
     }
 

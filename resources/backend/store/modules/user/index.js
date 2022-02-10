@@ -1,6 +1,6 @@
-import mutations from './mutations';
-import actions from './actions';
-import getters from './getters';
+import actions from "./actions";
+import mutations from "./mutations";
+import getters from "./getters";
 
 export default {
     namespaced: true,
@@ -14,8 +14,10 @@ export default {
             next_page: null,
             prev_page: null,
         },
+        detail: {},
+        errors: {},
     }),
-    mutations,
     actions,
-    getters
-}
+    getters,
+    mutations,
+};

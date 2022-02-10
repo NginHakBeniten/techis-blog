@@ -1,19 +1,15 @@
 const columns = [
     {
-        title: "ID",
-        slug: "id",
-    },
-    {
         title: "Username",
-        slug: "username",
+        key: "username",
     },
     {
         title: "Email",
-        slug: "email",
+        key: "email",
     },
     {
         title: "Role",
-        slug: "role",
+        key: "role",
     },
 ];
 export { columns };

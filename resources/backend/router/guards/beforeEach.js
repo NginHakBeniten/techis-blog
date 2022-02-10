@@ -6,7 +6,6 @@ export default (to, from, next) => {
 	if (!isAuthenticated && to.name !== 'login') {
 		next({ name: 'login' });
 	} else if ((isAuthenticated && to.name === 'login') || to.path === '/') {
-        console.log("In dashboard");
 		next({ name: 'dashboard' });
 	} else {
 		next();
