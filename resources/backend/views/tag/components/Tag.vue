@@ -22,7 +22,7 @@
                     <CFormInput
                         type="text" 
                         disabled
-                        :model-value="slug"
+                        :model-value="data.slug"
                     />
                 </div>
             </CForm>
@@ -34,13 +34,29 @@
 import BaseEntity from '@components/base/BaseEntity.vue';
 import { computed, ref } from '@vue/reactivity';
 import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+import { onMounted } from '@vue/runtime-core';
 export default {
     setup() {
         const store = useStore();
-
+        const router = useRouter();
+        const id = +router.currentRoute.value.params.id;
         const data = ref({
-            name: ""
+            name: "",
+            slug: ""
         });
+
+        data.value.slug = computed(() => {
+            return data.value.name.toLowerCase().replace(/ /g, '-');
+        })
+
+        onMounted(() => {
+            if (id) {
+                store.dispatch('tag/showTag', id).then((res) => {
+                    data.value.name = res.data.name
+                })
+            }
+        })
 
         const onChange = (event) => {
             const {name, value} = event.target;
@@ -51,21 +67,21 @@ export default {
         }
 
         const onSubmit = () => {
-            store.dispatch('tag/store', {
-                ...data.value,
-                slug: slug.value
-            })
+            if (id) {
+                store.dispatch('tag/update', {
+                    id,
+                    ...data.value
+                })
+            } else {
+                store.dispatch('tag/store', data.value)
+            }
+            router.back()
         }
-
-        const slug = computed(() => {
-            return data.value.name.toLowerCase().replace(/ /g, '-');
-        })
 
         return {
             onChange,
             onSubmit,
-            data,
-            slug
+            data
         }
     },
     components: {

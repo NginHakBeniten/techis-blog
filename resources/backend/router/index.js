@@ -1,5 +1,5 @@
 import { h, resolveComponent } from "vue";
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 
 import DefaultLayout from "@/layouts/DefaultLayout";
 import guard from "./guards";
@@ -153,12 +153,19 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
+    history: createWebHistory(),
     routes,
-    scrollBehavior() {
-        // always scroll to top
-        return { top: 0 };
-    },
+    mode: "history",
+    linkActiveClass: "active",
+    scrollBehavior: (to, from, savedPosition) => {
+        if (savedPosition) {
+          return savedPosition;
+        }
+        if (to.hash) {
+          return { selector: to.hash };
+        }
+        return { x: 0, y: 0 };
+      },
 });
 
 router.beforeEach(guard.beforeEach);
